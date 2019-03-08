@@ -1,7 +1,7 @@
 const fileCache = require('think-cache-file');
 const nunjucks = require('think-view-nunjucks');
 const fileSession = require('think-session-file');
-const mysql = require('think-model-mysql');
+// const mysql = require('think-model-mysql');
 const {Console, File, DateFile} = require('think-logger3');
 const path = require('path');
 const isDev = think.env === 'development';
@@ -28,6 +28,22 @@ exports.cache = {
  * @type {Object}
  */
 exports.model = {
+  type: 'mongo', // 默认使用的类型，调用时可以指定参数切换
+  common: { // 通用配置
+    logConnect: isDev, // 是否打印数据库连接信息
+    logger: msg => think.logger.info(msg) // 打印信息的 logger
+  },
+  mongo: {
+    prefix: 'think_',
+    host: '127.0.0.1',
+    port: 27017,
+    user: 'wyc',
+    password: 'gpwyc',
+    database: 'gpwyc', // 数据库名称
+    encoding: 'utf8'
+  }
+};
+/* exports.model = {
   type: 'mysql',
   common: {
     logConnect: isDev,
@@ -45,7 +61,7 @@ exports.model = {
     password: 'root',
     dateStrings: true
   }
-};
+}; */
 
 /**
  * session adapter config

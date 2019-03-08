@@ -1,0 +1,3 @@
+use gpwyc
+show users
+db.createUser({ user: 'wyc', pwd: 'gpwyc', roles: ['dbAdmin', 'readWrite']});

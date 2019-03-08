@@ -10,7 +10,16 @@ npm install
 ## Start server
 
 ```
-npm start
+启动mongodb
+    mongod --dbpath D:/mongodb/data
+查看mongodb用户
+    use gpwyc
+    show users
+如果没有则创建
+    db.createUser({ user: 'wyc', pwd: 'gpwyc', roles: ['dbAdmin', 'readWrite']});
+
+启动后端
+    npm start
 ```
 
 ## Deploy with pm2
