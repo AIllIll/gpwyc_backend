@@ -5,7 +5,8 @@ const fileSession = require('think-session-file');
 const {Console, File, DateFile} = require('think-logger3');
 const path = require('path');
 const isDev = think.env === 'development';
-
+// const socketio = require('think-websocket-socket.io');
+const ws = require('think-websocket-ws');
 /**
  * cache adapter config
  * @type {Object}
@@ -121,5 +122,28 @@ exports.logger = {
     pattern: '-yyyy-MM-dd',
     alwaysIncludePattern: true,
     filename: path.join(think.ROOT_PATH, 'logs/app.log')
+  }
+};
+
+/**
+ * websocket adapter config
+ * @type {Object}
+ */
+exports.websocket = {
+  type: 'ws',
+  common: {
+    // common config
+  },
+  ws: {
+    handle: ws,
+    // allowOrigin: '127.0.0.1:8360', // 默认所有的域名都允许访问
+    path: '/ws', // 默认 '/socket.io'
+    // adapter: null, // 默认无 adapter
+    messages: {
+      open: '/ws/open',
+      close: '/ws/close',
+      addUser: '/ws/addUser',
+      error: '/ws/error'
+    }
   }
 };
